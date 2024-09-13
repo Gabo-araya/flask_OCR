@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>OCR Image Uploader</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            padding-top: 50px;
+        }
+        #result {
+            display: none;
+            margin-top: 20px;
+        }
+        #ocrText {
+            width: 100%;
+            height: 200px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mb-4">Sube una imagen para OCR</h1>
+        <form id="ocrForm" enctype="multipart/form-data">
+            <div class="form-group">
+                <input type="file" class="form-control-file" name="file" accept=".png,.jpg,.jpeg,.gif">
+            </div>
+            <button type="submit" class="btn btn-primary">Subir y Procesar</button>
+        </form>
+
+        <div class="progress mt-3" style="display:none;">
+            <div class="progress-bar" role="progressbar" style="width: 0%;">0%</div>
+        </div>
+
+        <div id="result" class="mt-4">
+            <h2>Resultado:</h2>
+            <textarea id="ocrText" class="form-control mb-2" readonly></textarea>
+            <button id="copyButton" class="btn btn-secondary">Copiar</button>
+            <button id="resetButton" class="btn btn-info">Subir otra imagen</button>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#ocrForm').on('submit', function(e) {
+                e.preventDefault();
+                var formData = new FormData(this);
+                
+                $.ajax({
+                    xhr: function() {
+                        var xhr = new window.XMLHttpRequest();
+                        xhr.upload.addEventListener("progress", function(evt) {
+                            if (evt.lengthComputable) {
+                                var percentComplete = evt.loaded / evt.total;
+                                percentComplete = parseInt(percentComplete * 100);
+                                $('.progress').show();
+                                $('.progress-bar').width(percentComplete + '%');
+                                $('.progress-bar').html(percentComplete + '%');
+                            }
+                        }, false);
+                        return xhr;
+                    },
+                    url: '/upload',
+                    type: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {
+                        $('#ocrText').val(response.text);
+                        $('#result').show();
+                        $('.progress').hide();
+                    },
+                    error: function(response) {
+                        alert('Error: ' + response.responseJSON.error);
+                        $('.progress').hide();
+                    }
+                });
+            });
+
+            $('#copyButton').click(function() {
+                $('#ocrText').select();
+                document.execCommand('copy');
+                alert('Texto copiado al portapapeles');
+            });
+
+            $('#resetButton').click(function() {
+                $('#ocrForm')[0].reset();
+                $('#result').hide();
+                $('#ocrText').val('');
+            });
+        });
+    </script>
+</body>
+</html>

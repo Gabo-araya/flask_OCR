@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Detalles del Registro</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <div class="container mt-4">
+    <h1>Detalles del Registro</h1>
+
+
+    {% if result %}
+      <div class="card">
+        <div class="card-body">
+          <p class="card-text"><b>ID:</b> {{ result.id }}</p>
+          <p class="card-text"><b>Texto:</b> </p>
+          <pre>{{ result.text | safe }}</pre>
+          <p class="card-text"><b>Nombre de archivo:</b> {{ result.filename }}</p>
+          <p class="card-text"><b>Ancho:</b> {{ result.width }}</p>
+          <p class="card-text"><b>Alto:</b> {{ result.height }}</p>
+          <p class="card-text"><b>Formato:</b> {{ result.filename }}</p>
+          <p class="card-text"><b>Datos EXIF:</b></p>
+            <pre>{{ result.exif_data | safe }}</pre>
+        </div>
+      </div>
+    {% else %}
+      <div class="alert alert-danger" role="alert">
+        Registro no encontrado.
+      </div>
+    {% endif %}
+
+  <a href="{{ url_for('admin') }}" class="btn btn-sm btn-primary">Volver a la lista</a>
+</body>
+</html>
