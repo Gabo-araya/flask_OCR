@@ -1,10 +1,6 @@
-![[header_keyboard.jpg]]
 # Flask OCR
 
----
-Tags:  #codigo #linux #readme #python
-
-> [!info] Volver a [[Home]]
+Este proyecto consiste en una aplicación web que utiliza el framework Flask. La aplicación permite a los usuarios cargar archivos de imágenes, realizar reconocimiento óptico de caracteres (OCR) en ellos y almacenar el texto extraído junto con algunos metadatos en una base de datos.
 
 ---
 
@@ -276,4 +272,8 @@ export FLASK_ENV=development
 flask run
 ```
 
-- **Documentación oficial de Flask:** [https://flask.palletsprojects.com/en/2.2.x/](https://flask.palletsprojects.com/en/2.2.x/)
+Una vez lanzado el servidor, se puede acceder a la aplicación desde:
+* http://127.0.0.1:5000/
+* http://127.0.0.1:5000/admin
+  * user: admin
+  * pass: password132
