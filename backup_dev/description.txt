@@ -1,0 +1,19 @@
+Flask_OCR
+
+Este proyecto consiste en una aplicación web que utiliza el framework Flask. La aplicación permite a los usuarios cargar archivos de imágenes, realizar reconocimiento óptico de caracteres (OCR) en ellos y almacenar el texto extraído junto con algunos metadatos en una base de datos.
+
+Aquí se detallan los componentes clave:
+
+* Importaciones: el código comienza importando las bibliotecas necesarias como Flask, PIL para el procesamiento de imágenes, pytesseract para OCR, sqlite3 para interacciones con bases de datos y otras.
+* Configuración: define variables como UPLOAD_FOLDER para almacenar imágenes cargadas, extensiones de archivo permitidas y establece una clave secreta para la administración de sesiones.
+* Configuración de la base de datos: funciones como get_db e init_db se encargan de la conexión a una base de datos SQLite llamada ocr_data.db y crean tablas para almacenar los resultados de OCR y la información del usuario (si aún no existen).
+* Creación de usuario administrador: una función create_admin_user permite crear un usuario administrador inicial con nombre de usuario y contraseña almacenados en la base de datos.
+* Manejo de carga de archivos: la función upload_file maneja las cargas de archivos. Verifica los tipos de archivos válidos, guarda la imagen cargada en una ubicación temporal, realiza OCR usando Tesseract y extrae información adicional como las dimensiones de la imagen, el formato y los datos EXIF ​​(usando ExifTool). Luego, almacena el texto extraído y los metadatos en la base de datos antes de eliminar el archivo temporal.
+* Panel de administración y administración de usuarios:
+    * El decorador login_required restringe el acceso a rutas específicas que requieren que el usuario haya iniciado sesión.
+    * La ruta /admin muestra una lista de todos los resultados de OCR recuperados de la base de datos.
+    * Las rutas como /admin/delete/<int:id>, /admin/edit/<int:id> y /admin/details/<int:id> permiten administrar resultados individuales eliminando, editando el texto extraído y viendo información detallada.
+    * La ruta /login maneja el inicio de sesión del usuario con autenticación de nombre de usuario y contraseña en la base de datos.
+    * La ruta /logout cierra la sesión del usuario eliminando la información de la sesión.
+* Creación de plantillas: es probable que la aplicación use Jinja2 para la creación de plantillas. Define rutas para la página principal (/), inicio de sesión (/login) y, potencialmente, otras páginas como admin.html, edit.html, details.html y error.html para mostrar contenido de forma dinámica.
+* Ejecución de la aplicación: el código crea la carpeta de carga si no existe e inicializa la base de datos. Luego, utiliza app.run para iniciar el servidor de desarrollo Flask y, opcionalmente, habilita el modo de depuración y el contexto seguro (HTTPS).

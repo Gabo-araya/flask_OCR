@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Descripción del Proyecto Flask_OCR</title>
+        <link rel="stylesheet" href="styles.css" />
+    </head>
+    <body>
+        <h1>Proyecto Flask_OCR</h1>
+
+        <p>
+            Esta aplicación web, construida con el framework Flask, permite a
+            los usuarios realizar reconocimiento óptico de caracteres (OCR) en
+            imágenes cargadas.
+        </p>
+
+        <h3>Componentes Clave</h3>
+
+        <ul>
+            <li>
+                <strong>Importaciones</strong>: Se utilizan bibliotecas como
+                Flask, PIL, pytesseract, sqlite3 y otras para las
+                funcionalidades de la aplicación.
+            </li>
+            <li>
+                <strong>Configuración</strong>: Se establecen parámetros como la
+                ubicación de las imágenes cargadas, formatos permitidos y claves
+                secretas.
+            </li>
+            <li>
+                <strong>Base de datos</strong>: Se utiliza SQLite para almacenar
+                los resultados del OCR y la información de los usuarios.
+            </li>
+            <li>
+                <strong>Manejo de usuarios</strong>: Se implementa un sistema de
+                autenticación para permitir el acceso de los usuarios a
+                diferentes funcionalidades.
+            </li>
+            <li>
+                <strong>OCR y procesamiento de imágenes</strong>: Se utiliza
+                pytesseract para extraer texto de las imágenes y se almacenan
+                los resultados en la base de datos.
+            </li>
+            <li>
+                <strong>Interfaz de usuario</strong>: Se crea una interfaz web
+                para cargar imágenes, ver los resultados del OCR y administrar
+                los usuarios.
+            </li>
+        </ul>
+
+        <h3>Funcionalidades Principales</h3>
+        <ul>
+            <li>Cargar imágenes y realizar OCR.</li>
+            <li>Almacenar los resultados del OCR en una base de datos.</li>
+            <li>Visualizar los resultados del OCR.</li>
+            <li>Editar y eliminar resultados.</li>
+            <li>Autenticación de usuarios.</li>
+        </ul>
+
+        <h3>Tecnologías Utilizadas</h3>
+        <ul>
+            <li>Flask</li>
+            <li>Python</li>
+            <li>SQLite</li>
+            <li>PIL</li>
+            <li>pytesseract</li>
+            <li>Jinja2 (Probablemente)</li>
+        </ul>
+    </body>
+</html>
