@@ -188,119 +188,6 @@ pip3 install openpyxl==3.1.5
 * Pillow: Para manipular imágenes.
 * pytesseract: Para realizar el reconocimiento óptico de caracteres (OCR).
 
-## 4. Creación de script
-
-Se realizará scraping sobre la página
-* https://books.toscrape.com/index.html
-* https://books.toscrape.com/catalogue/page-1.html
-
-```Python
-# flaskOCR.py
-
-from flask import Flask, render_template, request
-from PIL import Image
-import pytesseract
-
-app = Flask(__name__)
-
-@app.route('/', methods=['GET', 'POST'])
-def index():
-    if request.method == 'POST':
-        if 'file' not in request.files:
-            return 'No file part'
-        file = request.files['file']
-        if file.filename == '':
-            return 'No selected file'
-        if file:
-            # Guardar la imagen temporalmente
-            file.save('temp.jpg')
-            # Realizar OCR
-            text = pytesseract.image_to_string(Image.open('temp.jpg'))
-            return text
-    return render_template('index.html')
-
-if __name__ == '__main__':
-    app.run(debug=True)
-
-```
-
-
-## 5. Plantilla HTML (index.html)
-
-``` HTML
-<!DOCTYPE html>
-<html>
-<head>
-    <title>OCR Image Uploader</title>
-</head>
-<body>
-    <h1>Sube una imagen para OCR</h1>
-    <form method="POST" enctype="multipart/form-data">
-        <input type="file" name="file">
-        <input type="submit" value="Subir y Procesar">
-    </form>
-</body>
-</html>
-```
-
----
-
-## 6. Explicación
-
-- **Ruta raíz:** La ruta `'/'` maneja tanto las solicitudes GET (mostrar el formulario) como POST (procesar la imagen).
-- **Subida de archivos:** Se utiliza `request.files` para acceder al archivo subido.
-- **Guardar imagen:** Se guarda la imagen temporalmente en un archivo con nombre 'temp.jpg'.
-- **Realizar OCR:** Se utiliza `pytesseract.image_to_string` para extraer el texto de la imagen.
-- **Mostrar resultado:** Se devuelve el texto extraído como respuesta.
-
-**Consideraciones adicionales:**
-
-- **Seguridad:**
-    - Limita los tipos de archivos permitidos para evitar ataques de subida de archivos.
-    - Limita el tamaño máximo de los archivos.
-- **Precisión de OCR:** La precisión de OCR depende de la calidad de la imagen y la configuración de pytesseract.
-- **Mejoras:**
-    - **Interfaz de usuario:** Personaliza la apariencia y funcionalidad del formulario.
-    - **Procesamiento en segundo plano:** Utiliza tareas asíncronas para no bloquear el servidor mientras se procesa la imagen.
-    - **Almacenamiento de imágenes:** Considera almacenar las imágenes en un sistema de almacenamiento en la nube.
-    - **Preprocesamiento de imágenes:** Mejora la calidad de la imagen antes de realizar el OCR.
-- **Integración con otros servicios:** Puedes integrar este sistema con servicios de reconocimiento de texto más avanzados o con servicios de almacenamiento en la nube.
-
-## 7. Ejemplo completo con mejoras
-
-``` python
-# ... (código anterior)
-
-@app.route('/', methods=['GET', 'POST'])
-def index():
-    if request.method == 'POST':
-        # ... (validaciones y procesamiento)
-        # ... (guardar imagen en la nube, si es necesario)
-        text = pytesseract.image_to_string(Image.open('temp.jpg'), lang='eng')  # Especificar idioma
-        return render_template('result.html', text=text)
-
-# Plantilla result.html
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Resultado OCR</title>
-</head>
-<body>
-    <h1>Texto extraído:</h1>
-    <p>{{ text }}</p>
-    <a href="/">Subir otra imagen</a>
-</body>
-</html>
-```
-
-
-
-**Próximos pasos:**
-
-- **Personalización:** Adapta el código a tus necesidades específicas.
-- **Mejoras:** Implementa las mejoras mencionadas anteriormente.
-- **Pruebas:** Realiza pruebas exhaustivas con diferentes tipos de imágenes.
-
 **Recursos adicionales:**
 
 - **Documentación de Flask:** [https://flask.palletsprojects.com/en/2.2.x/](https://flask.palletsprojects.com/en/2.2.x/)
@@ -308,7 +195,7 @@ def index():
 - **Documentación de pytesseract:** [https://pypi.org/project/pytesseract/](https://pypi.org/project/pytesseract/)
 
 ---
-## 8. Ejecutar la aplicación Flask
+## Ejecutar la aplicación Flask
 
 **¡Excelente!** Ya tienes la estructura básica de tu aplicación Flask para realizar OCR. Ahora, para ponerla en funcionamiento, necesitarás ejecutar el archivo Python que contiene tu código.
 
@@ -375,11 +262,6 @@ Una vez que el servidor se inicie, se te proporcionará una URL (por ejemplo, `h
 
     (en Linux/macOS)
 
-### **Consideraciones adicionales:**
-
-- **Virtual environments:** Si estás utilizando un entorno virtual, asegúrate de activarlo antes de ejecutar el comando `flask run`.
-- **Seguridad:** Al desarrollar en modo depuración, asegúrate de que tu aplicación no esté expuesta a internet directamente.
-- **Producción:** Para desplegar tu aplicación en producción, necesitarás un servidor web como Gunicorn o uWSGI, y un servidor de aplicaciones como Apache o Nginx.
 
 **Ejemplo completo (en Linux/macOS):**
 
@@ -397,14 +279,4 @@ export FLASK_ENV=development
 flask run
 ```
 
-**¡Con esto, deberías poder ejecutar tu aplicación Flask y comenzar a subir imágenes para realizar OCR!**
-
-**¿Tienes alguna otra pregunta sobre cómo ejecutar tu aplicación o sobre alguna parte del código?**
-
-**Consejos adicionales:**
-
-- **Explora la documentación oficial de Flask:** [https://flask.palletsprojects.com/en/2.2.x/](https://flask.palletsprojects.com/en/2.2.x/)
-- **Utiliza herramientas de desarrollo:** Los IDEs como PyCharm o Visual Studio Code ofrecen herramientas para depurar y perfilar tu aplicación Flask.
-- **Considera utilizar un framework de despliegue:** Heroku, AWS Elastic Beanstalk o Google Cloud Platform son opciones populares para desplegar aplicaciones Flask.
-
-**¿Qué más te gustaría saber sobre Flask o sobre el desarrollo web en general?**
+- **Documentación oficial de Flask:** [https://flask.palletsprojects.com/en/2.2.x/](https://flask.palletsprojects.com/en/2.2.x/)
