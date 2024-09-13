@@ -99,9 +99,8 @@ $ sudo apt install python3-pip
 ```
 
 * Instalación de virtualenv
-Video de apoyo: [Entornos Virituales (virtualenv) de Python en Visual Studio Code](https://www.youtube.com/watch?v=2kLYOzNb3uU)
 
-![https://www.youtube.com/watch?v=2kLYOzNb3uU](https://www.youtube.com/watch?v=2kLYOzNb3uU)
+Video de apoyo: [Entornos Virituales (virtualenv) de Python en Visual Studio Code](https://www.youtube.com/watch?v=2kLYOzNb3uU)
 
 ```
 pip3 install virtualenv
@@ -124,12 +123,12 @@ Por orden, es ideal que los entornos virtuales se guarden todos en el mismo luga
 * Crear entorno virtual
 
 ```
-cd /home/gabo/envs/
+cd /home/user/envs/
 ```
 
-Este comando creará un entorno virtual llamado `env` en el directorio `~/envs/usuario/`
+Este comando creará un entorno virtual llamado `env` en el directorio `~/envs/proyecto/`
 ```
-python3 -m venv /home/gabo/envs/proyecto/env
+python3 -m venv /home/user/envs/proyecto/env
 ```
 
 
@@ -137,8 +136,6 @@ Si ya estás en la carpeta donde se guardarán los entornos virtuales:
 ```
 python3 -m venv env
 ```
-
-![[django_virtualenv.png]]
 
 * Activar entorno virtual
 ```
@@ -150,7 +147,7 @@ source ~/envs/proyecto/venv/bin/activate
 ```
 
 ```
-source /home/gabo/pyscripts/venv/bin/activate
+source /home/user/pyscripts/venv/bin/activate
 ```
 
 * Para desactivar el entorno virtual y volver al entorno global se usa este comando:
@@ -195,7 +192,7 @@ pip3 install openpyxl==3.1.5
 - **Documentación de pytesseract:** [https://pypi.org/project/pytesseract/](https://pypi.org/project/pytesseract/)
 
 ---
-## Ejecutar la aplicación Flask
+## 4. Ejecutar la aplicación Flask
 
 **¡Excelente!** Ya tienes la estructura básica de tu aplicación Flask para realizar OCR. Ahora, para ponerla en funcionamiento, necesitarás ejecutar el archivo Python que contiene tu código.
 
