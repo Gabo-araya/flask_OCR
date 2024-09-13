@@ -190,13 +190,11 @@ pip3 install openpyxl==3.1.5
 ---
 ## 4. Ejecutar la aplicación Flask
 
-**¡Excelente!** Ya tienes la estructura básica de tu aplicación Flask para realizar OCR. Ahora, para ponerla en funcionamiento, necesitarás ejecutar el archivo Python que contiene tu código.
+### 1. **Abrir la terminal o línea de comandos.**
 
-### 1. **Abre tu terminal o línea de comandos.**
+- Navegar hasta el directorio del proyecto (`app.py`).
 
-- **Navega hasta el directorio** donde se encuentra tu archivo Python (por ejemplo, `app.py`).
-
-### 2. **Ejecuta el siguiente comando:**
+### 2. **Ejecutar el siguiente comando:**
 
 Bash
 
@@ -204,7 +202,7 @@ Bash
 flask run
 ```
 
-O, si prefieres usar el módulo `flask` directamente:
+También se puede ejecutar el módulo `flask` directamente:
 
 Bash
 
@@ -214,17 +212,9 @@ python -m flask
 
 ### 3. **Accede a la aplicación:**
 
-Una vez que el servidor se inicie, se te proporcionará una URL (por ejemplo, `http://127.0.0.1:5000/`). Abre esta URL en tu navegador para acceder a tu aplicación.
+Una vez que el servidor se inicie, se te proporcionará una URL (usualmente, `http://127.0.0.1:5000/`). Se debe abrir esta URL en tu navegador para acceder a tu aplicación.
 
 ### **Opciones adicionales:**
-
-- **Especificar el archivo:** Si tu archivo no se llama `app.py` o `wsgi.py`, puedes especificarlo así:
-
-    Bash
-
-    ```
-    flask run --app tu_archivo.py
-    ```
 
 - **Cambiar el puerto:**
 
@@ -234,38 +224,31 @@ Una vez que el servidor se inicie, se te proporcionará una URL (por ejemplo, `h
     flask run --host=0.0.0.0 --port=8080
     ```
 
-    Esto te permitirá acceder a la aplicación desde otras máquinas en la red, utilizando el puerto 8080.
+    Esto permite acceder a la aplicación desde otras máquinas en la red, utilizando el puerto 8080.
 - **Modo depuración:** El modo depuración te permite recargar automáticamente la aplicación cuando haces cambios en el código y proporciona un depurador interactivo. Para activarlo:
 
-    Bash
+    En Windows:
 
-    ```
+    ``` Bash
     set FLASK_ENV=development
     flask run
     ```
 
-    (En Windows) o
+    En Linux/macOS:
 
-    Bash
-
-    ```
+    ``` Bash
     export FLASK_ENV=development
     flask run
     ```
 
-    (en Linux/macOS)
-
-
 **Ejemplo completo (en Linux/macOS):**
 
-Bash
-
-```
+``` Bash
 # Activar el entorno virtual (si lo estás usando)
 source ./env/bin/activate
 
 # Navegar al directorio de la aplicación
-cd mi_proyecto_flask
+cd flask_OCR
 
 # Ejecutar la aplicación en modo desarrollo
 export FLASK_ENV=development
@@ -274,6 +257,8 @@ flask run
 
 Una vez lanzado el servidor, se puede acceder a la aplicación desde:
 * http://127.0.0.1:5000/
+
+Para visitar el panel de administración, donde se pueden revisar los detalles del contenido de cada imagen, editarlo y eliminarlo, acceder a la siguiente URL:
 * http://127.0.0.1:5000/admin
   * user: admin
   * pass: password132
